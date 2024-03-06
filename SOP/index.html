@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOP</title>
+    <link rel="stylesheet" href="./style/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js" integrity="sha512-+k1pnlgt4F1H8L7t3z95o3/KO+o78INEcXTbnoJQ/F2VqDVhWoaiVml/OEHv9HsVgxUaVW+IbiZPUJQfF/YxZw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+
+<body>
+    
+        <div class="menu_wrapper" id="menu" style="display: flex;">
+            <button id="add_new" class="box" onclick="menu_select('add_new')">
+                Внести в базу
+            </button>
+            <button id="check" class="box" onclick="menu_select('check')">
+                Перевірити жмиха
+            </button>
+        </div>
+
+        <div class="user_add" id="user_add" style="display: none;">
+            <form action="" method="post" name="user_ad">
+                <input placeholder="ПІБ" name="name" type="text"  autocomplete="off" required value="" >
+                <input name='nickname' type="text" placeholder="Позивний з кпк" autocomplete="off" value="" required>
+                <input name="date" type="date" placeholder="Дата народження" autocomplete="off" value="" required>
+                <textarea name="desc" id="desc" cols="20" rows="5" placeholder="Додаткова інформація" autocomplete="off" ></textarea>
+                <button id="send_user" class="box" type="submit">
+                    Відправити
+                </button>
+                <button class="box" style="margin: 0 15px;padding: 0;" onclick="back(user_add)" type="button">Назад</button>
+            </form>
+        </div>
+<script>
+    document.forms.user_ad.onsubmit = function(){
+        event.preventDefault()
+        write_data(this.name.value, this.nickname.value, this.date.value, this.desc.value)
+        showPopup("Жмих зареєстрований успішно!")
+        back(user_add)
+    }
+</script>
+        <div class="licens_add" id="licens_ad" style="display: none;">
+            <form action="" method="post" name="register_license">
+                <p>Перебування в ЧЗВ</p>
+                <select name="day" id="day" >
+                    <option value="none">-</option>
+                    <option value="3">3 дні</option>
+                    <option value="7">7 днів</option>
+                    <option value="30"> 30 днів</option>
+                </select>
+                <p>Ліцензія на зброю </p>
+                <select name="weapons" id="weapons" >
+                    <option value="none">-</option>
+                    <option value="1">1 рівень</option>
+                    <option value="2">2 рівень</option>
+                    <option value="3">3 рівень</option>
+                    <option value="4">4 рівень</option>
+                </select>
+                <p>Термін дії ліцензії на зброю</p>
+                <div class="checkbox_wrapper">
+                    <label for="3">3 дня -</label>
+                    <input type="radio" name="weapons_period" value="3" placeholder="3" class="checkbox">
+                    <label for="7">7 днів -</label>
+                    <input type="radio" name="weapons_period" value="7" placeholder="7" class="checkbox">
+                    <label for="30">30 днів -</label>
+                    <input type="radio" name="weapons_period" value="30" placeholder="30" class="checkbox">
+                </div>
+                <button id="send_user" class="box" type="submit">
+                    Відправити
+                </button>
+                <script>
+                    document.forms.register_license.onsubmit = function(){
+                        event.preventDefault()
+                        const checkbox_list = function(){
+                            checkboxes = document.getElementsByClassName("checkbox")
+                            for (let i = 0; i < checkboxes.length; i++) {
+                                if (checkboxes[i].checked) {
+                                    return checkboxes[i].value
+                                }
+                                
+                            }
+                        }
+                        
+                        add_license(this.day.value, this.weapons.value, checkbox_list())
+                        showPopup("Крассавчик! Не забудь поділитись бабосом")
+                        back(licens_ad)
+                    }
+                </script>
+                <button class="box" style="margin: 0 15px;padding: 0;" type="button" onclick="back(licens_ad)"  >Назад</button>
+            </form>
+        </div>
+        <div class="search_warapper" id="search_user" style="display: none;">
+            <form action="" method="get" name="search">
+                <input type="text" placeholder="Позивний з кпк" name="search_name" required>
+                <p id="error_search" style="display: none;">Відсутній</p>
+                <button id="search_user_button" class="box" type="submit" >Пошук</button>
+                <button class="box" style="margin: 0 15px;padding: 0;" onclick="back(search_user)" type="button" >Назад</button>
+                <script>
+                    document.forms.search.onsubmit = function(){
+                        event.preventDefault()
+                        user_search(this.search_name.value)
+                    }
+                </script>
+            </form>
+        </div>
+        <div class="user" id="searched_user" style="display: none;">
+            <p>ПІБ:</p>
+            <p id="user_name">
+                
+            </p>
+            <p>Позивний:</p>
+            <p id="user_nick">
+                
+            </p>
+            <p>
+                Дата народження:
+            </p>
+            <p id="user_date">
+                
+            </p>
+            <p>Опис:</p>
+            <p id="user_desc">
+                
+            </p>
+            <p>
+                Ліцензія на перебування:
+            </p>
+            <p id="user_license">
+                
+            </p>
+            <p>
+                Ліцензія на зброю:
+            </p>
+            <p id="user_weapons">
+                
+            </p>
+            <button id="check" class="box" onclick="menu_select('licens')">
+                Додати ліцензію
+            </button>
+            <button class="box" style="margin: 0 15px;padding: 0;" onclick="back(searched_user)" >Назад</button>
+
+        </div>
+
+
+
+
+        <script src="./js/database.js"></script>
+        <script src="./js/main.js"></script>
+</body>
+</html>

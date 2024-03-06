@@ -1,0 +1,157 @@
+@import url("https://fonts.googleapis.com/css?family=Raleway:400");
+/* Указываем box sizing */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Убираем внутренние отступы */
+ul[class],
+ol[class] {
+  padding: 0;
+}
+
+/* Убираем внешние отступы */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul[class],
+ol[class],
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+/* Выставляем основные настройки по-умолчанию для body */
+body {
+  min-height: 100vh;
+  scroll-behavior: smooth;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+}
+
+/* Удаляем стандартную стилизацию для всех ul и il, у которых есть атрибут class*/
+ul[class],
+ol[class] {
+  list-style: none;
+}
+
+/* Элементы a, у которых нет класса, сбрасываем до дефолтных стилей */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+/* Упрощаем работу с изображениями */
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Указываем понятную периодичность в потоке данных у article*/
+article > * + * {
+  margin-top: 1em;
+}
+
+/* Наследуем шрифты для инпутов и кнопок */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+/* Chrome, Firefox, Opera, Safari 10.1+ */
+::placeholder {
+  color: black;
+  opacity: 1;
+}
+ 
+/* Internet Explorer 10-11 */
+:-ms-input-placeholder {
+  color: black;
+}
+ 
+/* Microsoft Edge */
+::-ms-input-placeholder {
+  color: black;
+}
+
+
+/* Удаляем все анимации и переходы для людей, которые предпочитай их не использовать */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+:root {
+    --d: 2500ms;
+    --angle: 90deg;
+    --gradX: 100%;
+    --gradY: 50%;
+    --c1: rgba(168, 239, 255, 1);
+    --c2: rgba(168, 239, 255, 0.1);
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    max-width: 100vw;
+    max-height: 100vh;
+    background-color: rgba(10, 12, 18, 1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    color: aliceblue;
+
+}
+
+.menu_wrapper, .user_add,.licens_add, form,.search_warapper, .user {
+    display: flex;
+    flex-direction: column;
+}
+@media screen and (max-width: 500px) {
+  .menu_wrapper, .user_add,.licens_add, form,.search_warapper, .user {
+    width: 100%;
+    max-width: 100vw;
+  }
+}
+input, textarea,select{
+    margin: 15px;
+}
+input::placeholder{
+  color: black;
+}
+
+.box {
+    font-size: 30px;
+    margin: 15px;
+    border: 0.35rem solid;
+    background-color: transparent;
+    padding: 15px;
+    border-color: var(--c2);
+    cursor: pointer; 
+    color: aliceblue;
+
+}
+.checkbox_wrapper{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+#error_search {
+  margin: 0 auto;
+  color: red;
+}
+
